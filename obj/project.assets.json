@@ -8279,11 +8279,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\renat\\OneDrive\\Área de Trabalho\\PIM . 2SEM 2023\\PIM\\sistemaFolhaDePagamento\\sistemaFolhaDePagamentoAPI\\sistemaFolhaDePagamento.csproj",
+      "projectUniqueName": "C:\\Users\\renat\\Documents\\Repositórios\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento.csproj",
       "projectName": "sistemaFolhaDePagamento",
-      "projectPath": "C:\\Users\\renat\\OneDrive\\Área de Trabalho\\PIM . 2SEM 2023\\PIM\\sistemaFolhaDePagamento\\sistemaFolhaDePagamentoAPI\\sistemaFolhaDePagamento.csproj",
+      "projectPath": "C:\\Users\\renat\\Documents\\Repositórios\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento.csproj",
       "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\renat\\OneDrive\\Área de Trabalho\\PIM . 2SEM 2023\\PIM\\sistemaFolhaDePagamento\\sistemaFolhaDePagamentoAPI\\obj\\",
+      "outputPath": "C:\\Users\\renat\\Documents\\Repositórios\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

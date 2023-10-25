@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "T3g1E+q79/3gtDImxOe1n6JKszaShX+FEhI/TSJ+nRLMqUU53AmEpnTV4xdICSiIviq0nS0l6hoTjCQDtrZ1lA==",
+  "dgSpecHash": "pQAd5VmwaxX7Cpujt4EECN2XxdR3kMOCNgQZz60NAr0okK81WIWhfMZfhu9Tp5LTXNclf88EmrOoWZ6RDK+MQQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\renat\\OneDrive\\Área de Trabalho\\PIM . 2SEM 2023\\PIM\\sistemaFolhaDePagamento\\sistemaFolhaDePagamentoAPI\\sistemaFolhaDePagamento.csproj",
+  "projectFilePath": "C:\\Users\\renat\\Documents\\Repositórios\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento\\sistemaFolhaDePagamento.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\renat\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\renat\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sistemaFolhaDePagamento.Models;
 
@@ -10,9 +11,11 @@ using sistemaFolhaDePagamento.Models;
 namespace sistemaFolhaDePagamento.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231014230746_TabelaINSS")]
+    partial class TabelaINSS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -419,30 +422,6 @@ namespace sistemaFolhaDePagamento.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TabelaINSS");
-                });
-
-            modelBuilder.Entity("sistemaFolhaDePagamento.Models.TabelaIR", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("auto_id");
-
-                    b.Property<decimal>("Aliquota")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("Deducao")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("FaixaFinal")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("FaixaInicial")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TabelaIR");
                 });
 
             modelBuilder.Entity("sistemaFolhaDePagamento.Models.Telefone", b =>

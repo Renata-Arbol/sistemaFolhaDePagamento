@@ -28,6 +28,11 @@ namespace sistemaFolhaDePagamento.Models
 
         public DbSet<Login> Logins { get; set; }
 
+        public DbSet<Pagamento> Pagamentos { get; set; }
+
+        public DbSet<TabelaINSS> TabelaINSS { get; set; }
+        
+        public DbSet<TabelaIR> TabelaIR { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Funcionario>()

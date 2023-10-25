@@ -77,6 +77,7 @@ namespace sistemaFolhaDePagamento
             services.AddScoped<IRegistroPontoService, RegistroPontoService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IPagamentoService, PagamentoService>();
             services.AddSingleton<ITokenService>(provider =>
    {
        var configuration = provider.GetRequiredService<IConfiguration>();
