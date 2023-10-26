@@ -35,14 +35,15 @@ namespace sistemaFolhaDePagamento
             var connectionString = "Server=localhost;Database=sistemafolhadepagamento;User=root;Password=nometoken;";
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-                services.AddControllers().AddJsonOptions(options =>{
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
+            services.AddControllersWithViews()
+                .AddJsonOptions(options =>
+                {
                     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-                    });
-    services.AddControllersWithViews()
-        .AddJsonOptions(options =>
-        {
-            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        });
+                });
             // Configurar autenticação JWT
             services.AddAuthentication(options =>
             {
@@ -69,11 +70,8 @@ namespace sistemaFolhaDePagamento
             services.AddScoped<IEnderecoService, EnderecoService>();
             services.AddScoped<IContatoService, ContatoService>();
             services.AddScoped<IEmpresaService, EmpresaService>();
-            services.AddScoped<IDepartamentoService, DepartamentoService>();
             services.AddScoped<ICargoService, CargoService>();
             services.AddScoped<IFuncionarioCargoService, FuncionarioCargoService>();
-            services.AddScoped<ITipoEmailService, TipoEmailService>();
-            services.AddScoped<ITelefoneService, TelefoneService>();
             services.AddScoped<IRegistroPontoService, RegistroPontoService>();
             services.AddScoped<IFuncionarioService, FuncionarioService>();
             services.AddScoped<ILoginService, LoginService>();
@@ -158,27 +156,11 @@ namespace sistemaFolhaDePagamento
             CEP = "12345678"
         }
     },
-                        Departamentos = new List<Departamento>
-    {
-        new Departamento
-        {
-            Nome = "Departamento A",
-            Descricao = " Desc",
-            Cargos = new List<Cargo>
-            {
-                new Cargo
-                {
-                    Nome = "Cargo A1",
-                    // Outros campos do Cargo
-                }
-            }
-            // Outros campos do Departamento
-        }
-    },
-                        Funcionarios = new List<Funcionario>
-    {
 
-    }
+                        Funcionarios = new List<Funcionario>
+                        {
+
+                        }
                         // Outros campos da Empresa
                     };
 
@@ -189,22 +171,13 @@ namespace sistemaFolhaDePagamento
                     {
                         Nome = "João Funcionário",
                         DataNascimento = new DateTime(1990, 5, 15),
+                        Email = "Brasileiro",
+                        Sexo = "Brasileiro",
+                        Telefone = "Brasileiro",
                         Empresa = empresasave,
                         EmpresaId = empresa.Id,
 
-                        Telefones = new List<Telefone>
-    {
-        new Telefone
-        {
-            Tipo =  "Celular",
-            Numero = "98765-4321"
-        },
-        new Telefone
-        {
-            Tipo =   "Residencial",
-            Numero = "1234-5678"
-        }
-    },
+
                         Documento = new Documento
                         {
                             RG = "123456789",
@@ -214,7 +187,12 @@ namespace sistemaFolhaDePagamento
                             OrgaoEmissor = "SSP",
                             EstadoEmissor = "SP",
                             PaisEmissor = "Brasil",
-                            Sexo = "Masculino"
+                            Sexo = "Masculino",
+                            Nacionalidade = "Brasileiro",
+                            NoCtps = "Brasileiro",
+                            RNE = "Brasileiro",
+                            PIS = "Brasileiro",
+                            EstadoCivil = "Brasileiro",
                         }
                     };
 
@@ -224,6 +202,9 @@ namespace sistemaFolhaDePagamento
                         DataNascimento = new DateTime(1990, 5, 15),
                         Empresa = empresa,
                         EmpresaId = empresa.Id,
+                        Email = "Brasileiro",
+                        Sexo = "Brasileiro",
+                        Telefone = "Brasileiro",
                         Contatos = new List<Contato> {
                  new Contato
                  {
@@ -241,20 +222,6 @@ namespace sistemaFolhaDePagamento
             Cidade = "Cidade A",
             Estado = "SP",
             CEP = "12345678"
-        }
-    },
-
-                        Telefones = new List<Telefone>
-    {
-        new Telefone
-        {
-            Tipo = "Celular",
-            Numero = "98765-4321"
-        },
-        new Telefone
-        {
-            Tipo = "Residencial",
-            Numero = "1234-5678"
         }
     },
                         Login = new Login
@@ -276,7 +243,13 @@ namespace sistemaFolhaDePagamento
                             OrgaoEmissor = "SSP",
                             EstadoEmissor = "SP",
                             PaisEmissor = "Brasil",
-                            Sexo = "Masculino"
+                            Sexo = "Masculino",
+                            Nacionalidade = "Brasileiro",
+                            NoCtps = "Brasileiro",
+                            RNE = "Brasileiro",
+                            PIS = "Brasileiro",
+                            EstadoCivil = "Brasileiro",
+
                         },
                         Dependentes = new List<Dependente>
     {

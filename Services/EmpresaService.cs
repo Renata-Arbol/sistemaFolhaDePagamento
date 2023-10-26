@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Models;
 
-public class EmpresaService  : sistemaFolhaDePagamento.Service.IEmpresaService
+public class EmpresaService : sistemaFolhaDePagamento.Service.IEmpresaService
 {
     private readonly ApplicationDbContext _context;
 

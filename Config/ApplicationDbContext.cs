@@ -17,19 +17,11 @@ namespace sistemaFolhaDePagamento.Models
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Empresa> Empresas { get; set; }
-        public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<FuncionarioCargo> FuncionariosCargos { get; set; }
-
-        public DbSet<TipoEmail> TiposEmail { get; set; }
-
         public DbSet<RegistroPonto> RegistroPontos { get; set; }
-        public DbSet<Telefone> Telefones { get; set; }
-
         public DbSet<Login> Logins { get; set; }
-
         public DbSet<Pagamento> Pagamentos { get; set; }
-
         public DbSet<TabelaINSS> TabelaINSS { get; set; }
         
         public DbSet<TabelaIR> TabelaIR { get; set; }
@@ -53,8 +45,6 @@ namespace sistemaFolhaDePagamento.Models
             modelBuilder.Entity<Empresa>()
                 .HasKey(e => e.Id);
 
-            modelBuilder.Entity<Departamento>()
-                .HasKey(d => d.Id);
 
             modelBuilder.Entity<Cargo>()
                 .HasKey(c => c.Id);
@@ -70,14 +60,10 @@ namespace sistemaFolhaDePagamento.Models
             modelBuilder.Entity<FuncionarioCargo>()
                 .HasKey(fc => fc.Id);
 
-            modelBuilder.Entity<TipoEmail>()
-                .HasKey(te => te.Id);
-
             modelBuilder.Entity<RegistroPonto>()
                 .HasKey(rp => rp.Id); // Defina a chave primária
 
-            modelBuilder.Entity<Telefone>()
-            .HasKey(e => e.Id); // Use 
+
 
             // Definindo relacionamentos
 
@@ -107,25 +93,12 @@ namespace sistemaFolhaDePagamento.Models
                 .WithMany(emp => emp.Enderecos)
                 .HasForeignKey(e => e.EmpresaId);
 
-            modelBuilder.Entity<Departamento>()
-                .HasOne(d => d.Empresa)
-                .WithMany(emp => emp.Departamentos)
-                .HasForeignKey(d => d.EmpresaId);
-
-            modelBuilder.Entity<Cargo>()
-                .HasOne(c => c.Departamento)
-                .WithMany(d => d.Cargos)
-                .HasForeignKey(c => c.DepartamentoId);
-
             modelBuilder.Entity<RegistroPonto>()
                 .HasOne(rp => rp.FuncionarioCargo)
                 .WithMany(fc => fc.RegistroPontos)
                 .HasForeignKey(rp => rp.FuncionarioCargoId);
 
-            modelBuilder.Entity<Funcionario>()
-                .HasMany(f => f.Telefones) // Funcionario possui muitos Telefones
-                .WithOne(t => t.Funcionario) // Telefone pertence a um Funcionario
-                .HasForeignKey(t => t.FuncionarioId); // Chave estrangeira em Telefone
+
 
             modelBuilder.Entity<Login>()
                 .HasOne(l => l.Funcionario) // Um Login pertence a uma Empresa

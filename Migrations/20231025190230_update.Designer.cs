@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using sistemaFolhaDePagamento.Models;
 
@@ -10,9 +11,11 @@ using sistemaFolhaDePagamento.Models;
 namespace sistemaFolhaDePagamento.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231025190230_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,10 +148,6 @@ namespace sistemaFolhaDePagamento.Migrations
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("EstadoCivil")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("EstadoEmissor")
                         .IsRequired()
                         .HasMaxLength(2)
@@ -157,22 +156,10 @@ namespace sistemaFolhaDePagamento.Migrations
                     b.Property<long?>("FuncionarioId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Nacionalidade")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NoCtps")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("OrgaoEmissor")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
-
-                    b.Property<string>("PIS")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("PaisEmissor")
                         .IsRequired()
@@ -182,10 +169,6 @@ namespace sistemaFolhaDePagamento.Migrations
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
-
-                    b.Property<string>("RNE")
-                        .IsRequired()
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Sexo")
                         .IsRequired()
@@ -291,10 +274,6 @@ namespace sistemaFolhaDePagamento.Migrations
                     b.Property<long?>("DocumentoId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<long>("EmpresaId")
                         .HasColumnType("bigint");
 
@@ -305,14 +284,6 @@ namespace sistemaFolhaDePagamento.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Sexo")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("longtext");
 

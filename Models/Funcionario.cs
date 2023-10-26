@@ -15,6 +15,15 @@ namespace sistemaFolhaDePagamento.Models
 
         [Required(ErrorMessage = "O campo Nome é obrigatório.")]
         public required string Nome { get; set; }
+        
+        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        public required string Sexo { get; set; }
+        
+        [Required(ErrorMessage = "O campo Email é obrigatório.")]
+        public required string Email { get; set; }
+
+        [Required(ErrorMessage = "O campo Telefone é obrigatório.")]
+        public required string Telefone { get; set; }
 
 
         [Required(ErrorMessage = "O campo DataNascimento é obrigatório.")]
@@ -31,9 +40,6 @@ namespace sistemaFolhaDePagamento.Models
 
 
         public ICollection<FuncionarioCargo>? FuncionariosCargos { get; set; }
-
-        public ICollection<Telefone>? Telefones { get; set; }
-
         public ICollection<Endereco>? Enderecos { get; set; }
 
         [System.Text.Json.Serialization.JsonIgnore]

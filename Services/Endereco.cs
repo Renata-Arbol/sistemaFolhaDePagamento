@@ -5,7 +5,7 @@ using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Service;
 using sistemaFolhaDePagamento.Models;
 
-public class EnderecoService  : sistemaFolhaDePagamento.Service.IEnderecoService
+public class EnderecoService : sistemaFolhaDePagamento.Service.IEnderecoService
 {
     private readonly ApplicationDbContext _context;
 

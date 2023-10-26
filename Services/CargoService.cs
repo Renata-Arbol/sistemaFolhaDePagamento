@@ -53,7 +53,6 @@ public class CargoService  : sistemaFolhaDePagamento.Service.ICargoService
         existingCargo.JornadaTrabalhoHoras = cargo.JornadaTrabalhoHoras;
         existingCargo.SalarioMensal = cargo.SalarioMensal;
         existingCargo.SalarioHora = cargo.SalarioHora;
-        existingCargo.DepartamentoId = cargo.DepartamentoId; // Atualize o ID do departamento, se necessário
 
         // Lembre-se de que, se você quiser atualizar outras propriedades, também deve fazê-lo aqui.
 

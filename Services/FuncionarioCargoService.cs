@@ -5,7 +5,7 @@ using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Service;
 using sistemaFolhaDePagamento.Models;
 
-public class FuncionarioCargoService  : sistemaFolhaDePagamento.Service.IFuncionarioCargoService
+public class FuncionarioCargoService : sistemaFolhaDePagamento.Service.IFuncionarioCargoService
 {
     private readonly ApplicationDbContext _context;
 

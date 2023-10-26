@@ -8,7 +8,7 @@ using sistemaFolhaDePagamento.DTOS;
 using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Models;
 
-public class PagamentoService  : sistemaFolhaDePagamento.Service.IPagamentoService
+public class PagamentoService : sistemaFolhaDePagamento.Service.IPagamentoService
 {
     private readonly ApplicationDbContext _context;
 
@@ -24,96 +24,95 @@ public class PagamentoService  : sistemaFolhaDePagamento.Service.IPagamentoServi
 
     public CalcResponse GetPagamentoById(long id)
     {
-        
-        // Data de início e fim para o período desejado (por exemplo, outubro de 2023)
+
         int ano = 2023;
         int mes = 10;
         var primeiroDiaDoMes = new DateTime(ano, mes, 1);
         var ultimoDiaDoMes = primeiroDiaDoMes.AddMonths(1).AddDays(-1);
-        
-        var registrosPonto = _context.RegistroPontos        
+
+        var registrosPonto = _context.RegistroPontos
         .Where(rp => rp.FuncionarioCargo.FuncionarioId == id && rp.DataHora >= primeiroDiaDoMes && rp.DataHora <= ultimoDiaDoMes)
         .OrderBy(rp => rp.DataHora)
-        .ToList();  // Execute a consulta e traga os registros para o lado do cliente
+        .ToList();
         double horasTrabalhadasNoMes = 0;
         DateTime? entrada = null;
         DateTime? saida = null;
 
-    foreach (var registro in registrosPonto)
-    {
-        if (registro.Tipo == "entrada")
+        foreach (var registro in registrosPonto)
         {
-            entrada = registro.DataHora;
-        }
-        else if (registro.Tipo == "saida")
-        {
-            saida = registro.DataHora;
-
-            if (entrada.HasValue && saida.HasValue)
+            if (registro.Tipo == "entrada")
             {
-                horasTrabalhadasNoMes += (saida.Value - entrada.Value).TotalHours;
-                entrada = null;
-                saida = null;
+                entrada = registro.DataHora;
+            }
+            else if (registro.Tipo == "saida")
+            {
+                saida = registro.DataHora;
+
+                if (entrada.HasValue && saida.HasValue)
+                {
+                    horasTrabalhadasNoMes += (saida.Value - entrada.Value).TotalHours;
+                    entrada = null;
+                    saida = null;
+                }
             }
         }
-    }
-    
-    Console.WriteLine($"Ano: {ano}, Mês: {mes}, Horas Trabalhadas: {horasTrabalhadasNoMes} horas");
 
-    var cargoAtual = _context.Cargos
-            .Include(fc => fc.FuncionariosCargos)
-            .Where(fc => fc.FuncionariosCargos.Where(
-                fcid => fcid.FuncionarioId == id).FirstOrDefault().CargoId == fc.Id 
-            )            
-            .FirstOrDefault();
+        Console.WriteLine($"Ano: {ano}, Mês: {mes}, Horas Trabalhadas: {horasTrabalhadasNoMes} horas");
 
-    Console.WriteLine($"Horas de Jornada Trabalho: {cargoAtual.JornadaTrabalhoHoras}, Salario Hora: {cargoAtual.SalarioHora}, Salario Mensal: {cargoAtual.SalarioMensal}");
+        var cargoAtual = _context.Cargos
+                .Include(fc => fc.FuncionariosCargos)
+                .Where(fc => fc.FuncionariosCargos.Where(
+                    fcid => fcid.FuncionarioId == id).FirstOrDefault().CargoId == fc.Id
+                )
+                .FirstOrDefault();
 
-    var salarioBruto = (decimal)horasTrabalhadasNoMes * cargoAtual.SalarioHora;
-    TabelaINSS aliquotaInss =  _context.TabelaINSS.Where(tinss => tinss.FaixaInicial <= salarioBruto).OrderByDescending(o => o.FaixaInicial).FirstOrDefault();
+        Console.WriteLine($"Horas de Jornada Trabalho: {cargoAtual.JornadaTrabalhoHoras}, Salario Hora: {cargoAtual.SalarioHora}, Salario Mensal: {cargoAtual.SalarioMensal}");
 
-    Console.WriteLine($"salarioBruto: {salarioBruto}");
+        var salarioBruto = (decimal)horasTrabalhadasNoMes * cargoAtual.SalarioHora;
+        TabelaINSS aliquotaInss = _context.TabelaINSS.Where(tinss => tinss.FaixaInicial <= salarioBruto).OrderByDescending(o => o.FaixaInicial).FirstOrDefault();
 
-    Console.WriteLine($"aliquota inss: {aliquotaInss.Aliquota}");
+        Console.WriteLine($"salarioBruto: {salarioBruto}");
 
-    var salarioBrutoDescINSS = salarioBruto - (salarioBruto*(aliquotaInss.Aliquota/100)); 
+        Console.WriteLine($"aliquota inss: {aliquotaInss.Aliquota}");
 
-    Console.WriteLine($"SalarioBrutoDescINSS: {salarioBrutoDescINSS}");
+        var salarioBrutoDescINSS = salarioBruto - (salarioBruto * (aliquotaInss.Aliquota / 100));
 
-    TabelaIR aliquotaIr =  _context.TabelaIR.Where(tir => tir.FaixaInicial <= salarioBrutoDescINSS).OrderByDescending(o => o.FaixaInicial).FirstOrDefault();
-    
-    Console.WriteLine($"aliquota ir: {aliquotaIr.Aliquota} deducao: {aliquotaIr.Deducao}");
+        Console.WriteLine($"SalarioBrutoDescINSS: {salarioBrutoDescINSS}");
 
-    var salarioLiquido = (salarioBrutoDescINSS - (salarioBrutoDescINSS*(aliquotaIr.Aliquota/100))) + aliquotaIr.Deducao;
+        TabelaIR aliquotaIr = _context.TabelaIR.Where(tir => tir.FaixaInicial <= salarioBrutoDescINSS).OrderByDescending(o => o.FaixaInicial).FirstOrDefault();
 
-    Console.WriteLine($"salarioLiquido: {salarioLiquido}");
-    
-    var parcelaFGTS = salarioBruto * (decimal)0.08;
+        Console.WriteLine($"aliquota ir: {aliquotaIr.Aliquota} deducao: {aliquotaIr.Deducao}");
 
-    Console.WriteLine($"Parcela FGTS: {parcelaFGTS}");
+        var salarioLiquido = (salarioBrutoDescINSS - (salarioBrutoDescINSS * (aliquotaIr.Aliquota / 100))) + aliquotaIr.Deducao;
 
-    var funcionarioNome = _context.Funcionarios.Where(f => f.Id == id).FirstOrDefault().Nome;
-    /* 
+        Console.WriteLine($"salarioLiquido: {salarioLiquido}");
 
-    ClasseNova instanciaDaClasseNova = new ClasseNova();
-    instanciaDaClasseNova.salarioLiquido = salarioLiquido;
-    faca isso para todos os valores que deve exibir, 
-    crie os atributos na classe nova e atribua os valores com as possiblidades acima que ja fez0
+        var parcelaFGTS = salarioBruto * (decimal)0.08;
 
-    */ 
-    CalcResponse pagamentoFuncionario = new CalcResponse();
+        Console.WriteLine($"Parcela FGTS: {parcelaFGTS}");
 
-    
-    pagamentoFuncionario.Nome = funcionarioNome;
-    pagamentoFuncionario.SalarioMensal = cargoAtual.SalarioMensal;
-    pagamentoFuncionario.ParcelaFGTS = parcelaFGTS;
-    pagamentoFuncionario.Horastrabalhadas = horasTrabalhadasNoMes;
-    pagamentoFuncionario.SalarioHora = cargoAtual.SalarioHora;
-    pagamentoFuncionario.SalarioBruto = salarioBruto;
-    pagamentoFuncionario.DescontoINSS = salarioBruto - salarioBrutoDescINSS;
-    pagamentoFuncionario.DescontoIR = salarioBrutoDescINSS - salarioLiquido;
+        var funcionarioNome = _context.Funcionarios.Where(f => f.Id == id).FirstOrDefault().Nome;
+        /* 
 
-    return pagamentoFuncionario;
+        ClasseNova instanciaDaClasseNova = new ClasseNova();
+        instanciaDaClasseNova.salarioLiquido = salarioLiquido;
+        faca isso para todos os valores que deve exibir, 
+        crie os atributos na classe nova e atribua os valores com as possiblidades acima que ja fez0
+
+        */
+        CalcResponse pagamentoFuncionario = new CalcResponse();
+
+
+        pagamentoFuncionario.Nome = funcionarioNome;
+        pagamentoFuncionario.SalarioMensal = cargoAtual.SalarioMensal;
+        pagamentoFuncionario.ParcelaFGTS = parcelaFGTS;
+        pagamentoFuncionario.Horastrabalhadas = horasTrabalhadasNoMes;
+        pagamentoFuncionario.SalarioHora = cargoAtual.SalarioHora;
+        pagamentoFuncionario.SalarioBruto = salarioBruto;
+        pagamentoFuncionario.DescontoINSS = salarioBruto - salarioBrutoDescINSS;
+        pagamentoFuncionario.DescontoIR = salarioBrutoDescINSS - salarioLiquido;
+
+        return pagamentoFuncionario;
     }
 
     public void CreatePagamento(Pagamento pagamento)
@@ -137,7 +136,7 @@ public class PagamentoService  : sistemaFolhaDePagamento.Service.IPagamentoServi
         }
 
         existingPagamento.ValorLiquido = pagamento.ValorLiquido;
-    
+
         _context.SaveChanges();
     }
 

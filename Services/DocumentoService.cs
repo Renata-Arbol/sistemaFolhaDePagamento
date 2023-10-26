@@ -5,7 +5,7 @@ using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Service;
 using sistemaFolhaDePagamento.Models;
 
-public class DocumentoService  : sistemaFolhaDePagamento.Service.IDocumentoService
+public class DocumentoService : sistemaFolhaDePagamento.Service.IDocumentoService
 {
     private readonly ApplicationDbContext _context;
 

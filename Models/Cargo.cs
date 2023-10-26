@@ -27,10 +27,6 @@ namespace sistemaFolhaDePagamento.Models
         [DataType(DataType.Currency)]
         public decimal SalarioHora { get; set; }
        
-        [ForeignKey("Departamento")]
-        public long? DepartamentoId { get; set; }
-      
-        public Departamento? Departamento { get; set; }
     
         public ICollection<FuncionarioCargo>? FuncionariosCargos { get; set; }
 

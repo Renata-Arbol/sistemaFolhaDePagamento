@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Models;
 
-public class FuncionarioService  : sistemaFolhaDePagamento.Service.IFuncionarioService
+public class FuncionarioService : sistemaFolhaDePagamento.Service.IFuncionarioService
 {
     private readonly ApplicationDbContext _context;
 
@@ -22,7 +22,7 @@ public class FuncionarioService  : sistemaFolhaDePagamento.Service.IFuncionarioS
     public Funcionario GetFuncionarioById(long id)
     {
         return _context.Funcionarios.Include(l => l.Documento).FirstOrDefault(f => f.Id == id);
-     
+
     }
 
     public void CreateFuncionario(Funcionario funcionario)

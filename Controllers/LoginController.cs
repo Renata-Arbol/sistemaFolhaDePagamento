@@ -24,7 +24,22 @@ namespace SuaAplicacao.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
-           return Ok( await _loginService.AuthenticateAsync(login.Usuario, login.Senha)); 
+            try
+            {
+                var funcionario = await _loginService.AuthenticateAsync(login.Usuario, login.Senha);
+
+                if (funcionario == null)
+                {
+                    return BadRequest($"Erro: Usuário ou senha inválido");
+                }
+
+                return Ok(funcionario);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
+            }
+
         }
     }
 }

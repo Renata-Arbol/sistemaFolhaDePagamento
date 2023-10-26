@@ -46,5 +46,19 @@ namespace sistemaFolhaDePagamento.Models
         public long? FuncionarioId { get; set; }
      
         public Funcionario? Funcionario { get; set; }
+
+
+        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        public required string EstadoCivil { get; set; }
+        
+        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        public required string Nacionalidade { get; set; }
+        
+        public string PIS { get; set; }
+
+        public string RNE { get; set; }
+
+
+        public  string NoCtps { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using sistemaFolhaDePagamento.Models;
 using sistemaFolhaDePagamento.Service;
 using sistemaFolhaDePagamento.Models;
 
-public class RegistroPontoService  : sistemaFolhaDePagamento.Service.IRegistroPontoService
+public class RegistroPontoService : sistemaFolhaDePagamento.Service.IRegistroPontoService
 {
     private readonly ApplicationDbContext _context;
 
@@ -56,7 +56,7 @@ public class RegistroPontoService  : sistemaFolhaDePagamento.Service.IRegistroPo
     }
 
 
-        public FuncionarioCargo RegistrarPonto(LoginDto login)
+    public FuncionarioCargo RegistrarPonto(LoginDto login)
     {
         var funcionario = _context.Logins
             .Where(l => l.Usuario == login.Usuario && l.Senha == login.Senha)

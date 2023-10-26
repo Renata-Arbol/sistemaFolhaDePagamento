@@ -83,7 +83,7 @@ namespace sistemaFolhaDePagamento.Services
             if (login == null || !VerifyPassword(login.Senha, senha))
             {
                 // Se o login não for encontrado ou a senha não coincidir, retorne uma string vazia.
-                return  "{\"error\":\"Credenciais inválidas\"}";
+                return null;
             }
 
             // Se a autenticação for bem-sucedida, retorne um token JWT como uma string.
@@ -96,10 +96,10 @@ namespace sistemaFolhaDePagamento.Services
                     Funcionario = login.Funcionario,
                     Empresa = login.Empresa,
                 }
-                 // Adicione as configurações do Newtonsoft.Json aqui
+            // Adicione as configurações do Newtonsoft.Json aqui
             );
 
-            return  $"{{\"token\":\"{token}\"}}";;
+            return $"{{\"token\":\"{token}\"}}"; ;
         }
 
         private bool VerifyPassword(string hashedPassword, string providedPassword)
