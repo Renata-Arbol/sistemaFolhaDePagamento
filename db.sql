@@ -81,7 +81,6 @@ CREATE TABLE `Funcionarios` (
     `DocumentoId` bigint NULL,
     `LoginId` bigint NULL,
     `EmpresaId` bigint NOT NULL,
-    `EmpresaId1` bigint NULL,
     CONSTRAINT `PK_Funcionarios` PRIMARY KEY (`auto_id`),
     CONSTRAINT `FK_Funcionarios_DocumentoId` FOREIGN KEY (`DocumentoId`) REFERENCES `Documentos` (`auto_id`),
     CONSTRAINT `FK_Funcionarios_Empresa` FOREIGN KEY (`EmpresaId`) REFERENCES `Empresas` (`auto_id`) ON DELETE CASCADE,
