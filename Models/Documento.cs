@@ -19,11 +19,7 @@ namespace sistemaFolhaDePagamento.Models
         [Required(ErrorMessage = "O campo CPF é obrigatório.")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve conter 11 dígitos.")]
         public required string CPF { get; set; }
-
-        [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório.")]
-        [DataType(DataType.Date, ErrorMessage = "Data de Nascimento inválida.")]
-        public DateTime DataNascimento { get; set; }
-
+        
         [Required(ErrorMessage = "O campo Data de Emissão é obrigatório.")]
         [DataType(DataType.Date, ErrorMessage = "Data de Emissão inválida.")]
         public DateTime DataEmissao { get; set; }
@@ -38,20 +34,17 @@ namespace sistemaFolhaDePagamento.Models
 
         [Required(ErrorMessage = "O campo País Emissor é obrigatório.")]
         public required string PaisEmissor { get; set; }
-
-        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
-        public required string Sexo { get; set; }
-
+       
         [ForeignKey("Funcionario")]
         public long? FuncionarioId { get; set; }
      
         public Funcionario? Funcionario { get; set; }
 
 
-        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        [Required(ErrorMessage = "O campo Estado Civil é obrigatório.")]
         public required string EstadoCivil { get; set; }
         
-        [Required(ErrorMessage = "O campo Sexo é obrigatório.")]
+        [Required(ErrorMessage = "O campo Nacionalidade é obrigatório.")]
         public required string Nacionalidade { get; set; }
         
         public string PIS { get; set; }

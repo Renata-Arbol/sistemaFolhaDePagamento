@@ -52,12 +52,10 @@ public class DocumentoService : sistemaFolhaDePagamento.Service.IDocumentoServic
         // Atualize as propriedades do documento existente com as propriedades do novo documento
         existingDocumento.RG = documento.RG;
         existingDocumento.CPF = documento.CPF;
-        existingDocumento.DataNascimento = documento.DataNascimento;
         existingDocumento.DataEmissao = documento.DataEmissao;
         existingDocumento.OrgaoEmissor = documento.OrgaoEmissor;
         existingDocumento.EstadoEmissor = documento.EstadoEmissor;
         existingDocumento.PaisEmissor = documento.PaisEmissor;
-        existingDocumento.Sexo = documento.Sexo;
         existingDocumento.FuncionarioId = documento.FuncionarioId; // Atualize o ID do funcionário, se necessário
 
         // Lembre-se de que, se você quiser atualizar outras propriedades, também deve fazê-lo aqui.
